@@ -13,8 +13,8 @@ def check_input(text, *args):
 
 # Define locations and options
 rareitem = ["Playful Cloud", "Split Soul Katana", "Black Rope", "Inverted Spear of Heaven"]
-item = ["Katana", "Spear", "Slaughter Demon"]
-cs = ["a Grade 4 CS", "a Grade 3 CS", "a Grade 2 CS", "a Grade 1 CS"] * 5  # Reduced redundancy
+item = ["Katana", "Spear", "Slaughter Demon"] * 3
+cs = ["a Grade 4 CS", "a Grade 3 CS", "a Grade 2 CS", "a Grade 1 CS"] * 5
 sgcs = ["Mahito", "Jogo", "Finger Bearer", "Hanami", "Dagon"]
 
 # Randomly choose an item and location
@@ -23,7 +23,7 @@ loc = random.choice(["a boat in the middle of the ocean"])
 
 # Define options for CT
 rareoptions = ["Soul Manipulation", "Ten Shadows", "Shrine", "Limitless", "Heavenly Restriction"]
-options = ["Blessed By the Sparks", "Gambling", "Blood Manipulation", "Inverse", "Boogie Woogie", "Construction", "CE Heavenly Restriction"] * 2
+options = ["Blessed By the Sparks", "Gambling", "Blood Manipulation", "Inverse", "Boogie Woogie", "Construction", "CE Heavenly Restriction", "Ratio"] * 2
 
 # Select two random options for CT
 cur1 = random.choice(options)
@@ -48,12 +48,16 @@ elif act == "2":
         print(f"Out of breath, you go back to the boat, but you find {csr}.")
         
         # Check if csr is in the list of strong cursed spirits
-        if csr in sgcs:  # Corrected check
+        if csr in sgcs:
             print("Yup, you get eviscerated.")
             print("End of journey.")
-        if csr in cs:
-            print("\nYou start figting\n")
-            if randit in rareitem:
-              print("Your item carried and you cooked the CS with minimal injuries.")
-            #battle system production has started
-
+        elif csr in cs:
+            print("\nYou start fighting!\n")
+            if csr == "a Grade 1 CS":
+                print("You awaken your CT with major injuries and win!")
+            elif randit in rareitem:
+                print("Your rare item helped you defeat the CS with minimal injuries.")
+            elif randit in item:
+                print("You win but suffer major injuries.")
+                
+# Here you can add more game mechanics, story elements, or battle systems!
