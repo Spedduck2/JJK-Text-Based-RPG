@@ -16,11 +16,12 @@ rareitem = ["Playful Cloud", "Split Soul Katana", "Black Rope", "Inverted Spear 
 item = ["Katana", "Spear", "Slaughter Demon"] * 3
 cs = ["a Grade 4 CS", "a Grade 3 CS", "a Grade 2 CS", "a Grade 1 CS"] * 5
 sgcs = ["Mahito", "Jogo", "Finger Bearer", "Hanami", "Dagon"]
-
+eyes = ["1"] * 7
+eyes2 = ["2"]
 # Randomly choose an item and location
 randit = random.choice(item + rareitem)
 loc = random.choice(["a boat in the middle of the ocean"])
-
+six = random.choice(eyes + eyes2)
 # Define options for CT
 rareoptions = ["Soul Manipulation", "Ten Shadows", "Shrine", "Limitless", "Heavenly Restriction"]
 options = ["Blessed By the Sparks", "Gambling", "Blood Manipulation", "Inverse", "Boogie Woogie", "Construction", "CE Heavenly Restriction", "Ratio"] * 2
@@ -34,6 +35,8 @@ cur2 = random.choice(options)
 chr = check_input(f"CHOOSE YOUR CT, {cur1} or {cur2} (1 or 2): \n", "1", "2")
 cur = cur1 if chr == "1" else cur2
 print(f"\n{cur} chosen\n")
+if six == "2":
+    print("you have been given the six eyes")
 print(f"You wake up in {loc}")
 
 # Check action input
