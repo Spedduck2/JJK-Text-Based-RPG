@@ -20,19 +20,25 @@ sgcs = ["Mahito", "Jogo", "Finger Bearer", "Hanami", "Dagon"]
 eyes = ["1"] * 15
 eyes2 = ["2"]
 
-rareoptions = ["Soul Manipulation", "Ten Shadows", "Shrine", "Limitless", "Heavenly Restriction"] * 2
-options = ["Blessed By the Sparks", "Gambling", "Blood Manipulation", "Inverse", "Boogie Woogie", "Construction", "CE Heavenly Restriction", "Ratio"] * 3
+rareoptions = ["Soul Manipulation", "Ten Shadows", "Shrine", "Limitless", "Heavenly Restriction", "Gambling"] * 2
+options = ["Blessed By the Sparks", "Blood Manipulation", "Inverse", "Boogie Woogie", "Construction", "CE Heavenly Restriction", "Ratio"] * 3
 
 # Randomly assign items, location, and abilities
 randit, randit2 = random.sample(item + rareitem, 2)
 loc = random.choice(["a boat in the middle of the ocean"])
 six = random.choice(eyes + eyes2)
-cur1, cur2 = random.sample(options + rareoptions, 2)
+cur1 = random.choice(options + rareoptions)
+options.remove(cur1)
+cur2 = random.choice(options + rareoptions)
 
 # Choose a CT
+if cur1 == cur2:
+    print(f"I guess you are chosen to have {cur1}")
 chr = check_input(f"CHOOSE YOUR CT, {cur1} or {cur2} (1 or 2): \n", "1", "2")
 cur = cur1 if chr == "1" else cur2
-print(f"\n{cur} chosen\n")
+if cur in rareoptions:
+    print("\nThis is a rare option that will help you in battle.")
+print(f"{cur} chosen\n")
 if six == "2":
     print("You have been given the six eyes")
 print(f"You wake up in {loc}")
@@ -55,18 +61,19 @@ def fight(csr, item, has_six_eyes, rare_ct, sukuna_fingers):
 
     # Adjust success chance based on the curse spirit's strength
     if csr == "a Grade 4 CS":
-        success_chance += 0.3  # Easiest opponent
+        success_chance += 0.4  # Easiest opponent
         print("It's a weak Grade 4 curse spirit.")
     elif csr == "a Grade 3 CS":
-        success_chance += 0.2
+        success_chance += 0.3
         print("It's a moderate Grade 3 curse spirit.")
     elif csr == "a Grade 2 CS":
-        success_chance += 0.1
+        success_chance += 0.2
         print("It's a tough Grade 2 curse spirit.")
     elif csr == "a Grade 1 CS":
+        success_chance += 0.1
         print("It's a powerful Grade 1 curse spirit!")
     elif csr in sgcs:
-        success_chance -= 0.2  # Strongest opponent
+        success_chance -= 0.5  # Strongest opponent
         print("It's an extremely powerful special-grade curse spirit!")
 
     # Increase chance if player has a rare item
@@ -76,12 +83,12 @@ def fight(csr, item, has_six_eyes, rare_ct, sukuna_fingers):
     
     # Increase chance if player has six eyes
     if has_six_eyes:
-        success_chance += 0.15
+        success_chance += 0.5
         print("The six eyes grant you enhanced vision and reflexes!")
         
     # Increase chance if player has a rare CT
     if rare_ct:
-        success_chance += 0.1
+        success_chance += 0.2
         print("Your rare CT helps you control the fight more effectively!")
     
     # Determine fight outcome
@@ -91,6 +98,7 @@ def fight(csr, item, has_six_eyes, rare_ct, sukuna_fingers):
             # Collect a Sukuna Finger if the curse spirit is a Finger Bearer
             sukuna_fingers += 1
             print("You found a Sukuna Finger! Your power has increased.")
+            success_chance += 0.2
         if success_chance < 0.5:
             print("However, you are severely injured from the battle.")
         else:
