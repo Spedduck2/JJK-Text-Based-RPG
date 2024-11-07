@@ -16,7 +16,8 @@ rareitem = ["Playful Cloud", "Split Soul Katana", "Black Rope", "Inverted Spear 
 item = ["Katana", "Spear", "Slaughter Demon"] * 3
 cs = ["a Grade 4 CS", "a Grade 3 CS", "a Grade 2 CS", "a Grade 1 CS"] * 5
 sgcs = ["Mahito", "Jogo", "Finger Bearer", "Hanami", "Dagon"]
-
+sgcsDROP = random.choice(rareitem)
+csDROP = random.choice(item)
 eyes = ["1"] * 15
 eyes2 = ["2"]
 
@@ -25,10 +26,10 @@ options = ["Blessed By the Sparks", "Blood Manipulation", "Inverse", "Boogie Woo
 
 # Randomly assign items, location, and abilities
 randit, randit2 = random.sample(item + rareitem, 2)
+randitH = random.choice(rareitem)
 loc = random.choice(["a boat in the middle of the ocean"])
 six = random.choice(eyes + eyes2)
 cur1 = random.choice(options + rareoptions)
-options.remove(cur1)
 cur2 = random.choice(options + rareoptions)
 
 # Choose a CT
@@ -42,6 +43,8 @@ print(f"{cur} chosen\n")
 if six == "2":
     print("You have been given the six eyes")
 print(f"You wake up in {loc}")
+if cur == "Heavenly Restriction":
+    print(f"You wake up next to {randitH}")
 
 # Initialize the number of Sukuna Fingers collected
 sukuna_fingers = 0
@@ -94,6 +97,12 @@ def fight(csr, item, has_six_eyes, rare_ct, sukuna_fingers):
     # Determine fight outcome
     if random.random() < success_chance:
         print("You managed to defeat the curse spirit!")
+        if csr in sgcs:
+            print(f"You find {sgcsDROP} where you defeated it.")
+            success_chance += 0.2
+        if csr in cs:
+            print(f"You find {csDROP} where you defeated it.")
+            success_chance += 0.1
         if csr == "Finger Bearer":
             # Collect a Sukuna Finger if the curse spirit is a Finger Bearer
             sukuna_fingers += 1
