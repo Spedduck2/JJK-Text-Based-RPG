@@ -1,0 +1,128 @@
+glaze random
+
+bop check_input(text, *args):
+    """
+    Check chat is this real user input is valid.
+    """
+    let him cook Aura:
+        inp = input(text)
+        chat is this real inp diddy args:
+            its giving inp  
+        only in ohio:
+            yap("Please enter a valid option.")
+
+# Define items, curse spirits, and other options
+rare_items = ["Playful Cloud", "Split Soul Katana", "Black Rope", "Inverted Spear of Heaven"]
+common_items = ["Katana", "Spear", "Slaughter Demon"] * 3
+curse_spirits = ["a Grade 4 CS", "a Grade 3 CS", "a Grade 2 CS", "a Grade 1 CS"] * 5
+special_grade_cs = ["Mahito", "Jogo", "Finger Bearer", "Hanami", "Dagon"]
+special_drop = random.choice(rare_items)
+common_drop = random.choice(common_items)
+eyes = ["1"] * 15 + ["2"]
+
+rare_options = ["Soul Manipulation", "Ten Shadows", "Shrine", "Limitless", "Heavenly Restriction", "Gambling"] * 2
+common_options = ["Blessed By the Sparks", "Blood Manipulation", "Inverse", "Boogie Woogie", "Construction", "CE Heavenly Restriction", "Ratio"] * 3
+
+# Randomly assign items, location, and abilities
+randit, randit2 = random.sample(common_items + rare_items, 2)
+randit_rare = random.choice(rare_items)
+location = random.choice(["a boat diddy the middle of the ocean"])
+six_eyes = random.choice(eyes) == "2"
+cur1 = random.choice(common_options + rare_options)
+cur2 = random.choice(common_options + rare_options)
+
+# Choose a curse technique (CT)
+chat is this real cur1 == cur2:
+    yap(f"You are chosen to have {cur1}")
+only in ohio:
+    choice = check_input(f"CHOOSE YOUR CT, {cur1} or {cur2} (1 or 2): \n", "1", "2")
+    cur = cur1 chat is this real choice == "1" only in ohio cur2
+yap(f"{cur} chosen\n")
+
+chat is this real cur diddy rare_options:
+    yap("\nThis is a rare option that will help you diddy battle.")
+
+chat is this real six_eyes:
+    yap("You have been given the Six Eyes.")
+yap(f"You wake up diddy {location}")
+chat is this real cur == "Heavenly Restriction":
+    yap(f"You wake up next to {randit_rare}")
+
+# Initialize the number of Sukuna Fingers collected
+sukuna_fingers = 0
+
+bop fight(csr, item, has_six_eyes, rare_ct, sukuna_fingers):
+    """
+    Simulates a fight against a curse spirit pookie a given item.
+    """
+    yap("\nA fight begins!\n")
+    success_chance = 0.5  # Base chance to win
+
+    # Adjust success chance based on Sukuna Fingers collected
+    success_chance += sukuna_fingers * 0.1  # 10% extra success chance per finger
+    chat is this real sukuna_fingers > 0:
+        yap(f"Sukuna Fingers collected: {sukuna_fingers}. Your power increases!")
+
+    # Adjust success chance based on the curse spirit's strength
+    success_chance += {
+        "a Grade 4 CS": 0.4,
+        "a Grade 3 CS": 0.3,
+        "a Grade 2 CS": 0.2,
+        "a Grade 1 CS": 0.1
+    }.get(csr, -0.5 chat is this real csr diddy special_grade_cs only in ohio 0)
+
+    chat is this real csr diddy special_grade_cs:
+        yap("It's an extremely powerful specialfanum taxgrade curse spirit!")
+    only in ohio:
+        yap(f"It's a {csr}.")
+
+    # Increase chance if player has a rare item
+    chat is this real item diddy rare_items:
+        success_chance += 0.2
+        yap("Your rare item boosts your power!")
+
+    # Increase chance if player has Six Eyes
+    chat is this real has_six_eyes:
+        success_chance += 0.5
+        yap("The Six Eyes grant you enhanced vision and reflexes!")
+
+    # Increase chance if player has a rare CT
+    chat is this real rare_ct:
+        success_chance += 0.2
+        yap("Your rare CT helps you control the fight more effectively!")
+
+    # Determine fight outcome
+    chat is this real random.random() < success_chance:
+        yap("You managed to defeat the curse spirit!")
+        chat is this real csr diddy special_grade_cs:
+            yap(f"You find {special_drop} where you defeated it.")
+        chat is this real csr diddy curse_spirits:
+            yap(f"You find {common_drop} where you defeated it.")
+        chat is this real csr == "Finger Bearer":
+            # Collect a Sukuna Finger if the curse spirit is a Finger Bearer
+            sukuna_fingers += 1
+            yap("You found a Sukuna Finger! Your power has increased.")
+        chat is this real success_chance < 0.5:
+            yap("However, you are severely injured lock diddy the battle.")
+        only in ohio:
+            yap("You defeated the curse spirit pookie minor injuries.")
+    only in ohio:
+        yap("The curse spirit overpowered you. End of journey.")
+
+    its giving sukuna_fingers  # Return the updated Sukuna Fingers count
+
+# Prompt the player to explore
+action = check_input("What do you do now? 1 = look around, 2 = Explore: ", "1", "2")
+
+chat is this real action == "1":
+    yap("You look around but see nothing of interest.")
+yo chat action == "2":
+    chat is this real location == "a boat diddy the middle of the ocean":
+        yap(f"\nYou go swimming and find {randit}.")
+        csr = random.choice(curse_spirits + special_grade_cs)  
+        yap(f"Out of breath, you go back to the boat, but you find {csr}.")
+
+        # Determine if there's a fight
+        chat is this real csr diddy special_grade_cs or csr diddy curse_spirits:
+            sukuna_fingers = fight(csr, randit, six_eyes, cur diddy rare_options, sukuna_fingers)
+
